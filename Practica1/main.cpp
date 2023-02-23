@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -6,6 +8,7 @@ int num=0;
 
 int main()
 {
+    srand (time(NULL));
     cout << "Ingrese el numero del ejercicio (0 para terminar): " << endl;
     cin >> num;
 
@@ -392,6 +395,297 @@ int main()
         }
         num=-1;
     }
+
+    else if(num==28){
+        cout << " Escriba un programa que encuentre el valor aproximado de pi en base a la siguiente suma innita: " << endl << endl;
+        float n=0, cont=1;
+        int signo=1;
+        double pi=0;
+        cout << "Ingrese el numero de elementos a usar en la aproximacion: " << endl;
+        cin >> n;
+
+        for(int i=1; i<=n; i++){      //Obtengo la sucesion (1-(1/3)+(1/5)...) segun la aproximacion deseada
+            pi=pi+((1/cont)*signo);   //Utilizo cont como denominador y a signo para ir alternando el signo
+            cont+=2;                  //Aumento 2 al denominador para el proximo ciclo
+            signo*=-1;                //Cambio el signo para el prosimo ciclo
+        }
+        pi*=4;
+        cout << "pi es aproximadamente: " << pi << endl;
+        num=-1;
+    }
+
+    else if(num==29){
+        cout << "Escriba un programa que adivine un número A (entre 0 y 100) seleccionado por el usuario. " << endl << endl;
+        int n=0, inf=1, sup=100;
+        char c;
+        n=inf+rand()%(sup-inf+1);                         //Genero numero aleatorio para dar inicio
+        cout << "Empieza en :" << n << endl;
+        while(c!='='){
+            cout << "El numero es menor '<', mayor '>' o igual '='?" << endl;
+            cin >> c;
+            if(c=='>') inf=n+1;                     //Si me dice que es mayor, entonces este queda como limite inferior
+            else if(c=='<') sup=n-1;                //Si me dice que es menor, ahora este será el límite superior
+            else if(c=='=')  break;                 //Si me dice que es igual salga del ciclo
+            n=inf+rand()%(sup-inf+1);               //Genero un numero aleatorio en el nuevo rango
+            cout << "El numero es? " << n << endl;
+        }
+        cout << "El numero es: " << n << endl;
+        num=-1;
+
+    }
+
+    else if(num==30){
+        cout << " Escriba un programa que genere un número aleatorio A (entre 0 y 100) y le pida al usuario que lo adivine." << endl << endl;
+        unsigned int n=0, in=0;
+        n=1+rand()%(100);
+        while(in!=n){
+            cout << "Ingreseun numero: " << endl;
+            cin >> in;
+            if(in<n) cout << "El numero es mayor" << endl;
+            else if(in>n) cout << "El numero es menor" << endl;
+            else cout << "Felicitaciones, el numero es:" << n << endl;
+        }
+        num=-1;
+    }
+    else if(num==31){
+        cout << "Escriba un programa que identique si un carácter ingresado es una vocal, una consonante o ninguna de las 2" << endl << endl;
+        char c;
+        cout << "Ingrese un caracter: " << endl;
+        cin >> c;
+        if(c>=65&&c<=90){
+            if(c!='A' && c!='E' && c!='I' && c!='O' && c!='U')       //Verifico si no es una vocal mayuscula
+                cout << c << " es una consonante." << endl;
+            else cout << c << " es una vocal." << endl;
+        }
+
+        else if(c>=97&&c<=122){
+            if(c!='a' && c!='e' && c!='i' && c!='o' && c!='u')       //Verifico si no es una vocal minuscula
+                cout << c << " es una consonante." << endl;          //Si no lo es entonces es una consonante
+            else cout << c << " es una vocal." << endl;
+        }
+        else cout << c << " no es una letra." << endl;               //Si no es ninguna, entonces no es una letra
+        num=-1;
+
+
+    }
+
+    else if(num==32){
+        cout << "Se necesita un programa que permita determinar la mínima combinación de billetes y monedas para una cantidad de dinero determinada." << endl << endl;
+        int n=0;
+        int BI[]={50000, 20000, 10000, 5000, 2000, 1000};
+        int MO[]={500, 200, 100, 50};
+        cout << "Ingrese la cantidad de dinero: " << endl;
+        cin >> n;
+
+        for(int i=0; i<6; i++){
+            cout << BI[i] << ":" << n/BI[i] << endl;       //Saco la cantidad de billetes del valor en pos(i).
+            n=n-(n/BI[i])*BI[i];                           //Resto el valor al total
+        }
+        for(int j=0; j<4; j++){                            //Saco la cantidad de monedas de la denominacion i.
+            cout << MO[j] << ":" << n/MO[j] << endl;
+            n=n-(n/MO[j])*MO[j];                           //Resto a la cantidad inicial.
+        }
+        cout << "Faltante: " << n << endl;
+        num=-1;
+
+
+    }
+
+    else if(num==33){
+        cout << " Escriba un programa que debe leer un mes y un día de dicho mes para luego decir si esa combinación de mes y día son válidos." << endl << endl;
+        int dia, mes;
+        cout << "Ingrese el mes: " << endl;
+        cin >> mes;
+        cout << "Ingrese el dia del mes: " << endl;
+        cin >> dia;
+
+        if(mes==1 || mes==3 || mes==5 || mes==7 || mes==8 || mes==10 || mes==12){               //Verifico si es un mes de 31
+            if(dia<=31 && dia>=1) cout << dia << "/" << mes << " es una fecha valida." << endl; // si el dia esta entre 1 y 31 es valido
+            else cout << dia << "/" << mes << " es una fecha invalida." << endl;                // si no no es valido
+        }
+        else if(mes==4 || mes==6 || mes==9 || mes==11){                                         //Verifico si es un mes de 30
+            if(dia<=30 && dia>=1) cout << dia << "/" << mes << " es una fecha valida." << endl; //si el dia esta entre 1 y 30 es valido
+            else cout << dia << "/" << mes << " es una fecha invalida." << endl;                // si no invalido
+        }
+        else if(mes>12 || mes<1) cout << mes << " No es un mes valido." << endl;                //Si el mes no esta entre 1 y 12 no vale
+        else if(mes==2){
+            if(dia==29) cout << dia << "/" << mes << " valido en bisiesto." << endl;
+            else if(dia>=1 && dia<=28) cout << dia << "/" << mes << " es una fecha valida." << endl;   //Condicion por si el mes es 12 para bisiestos
+            else cout << dia << "/" << mes << " es una fecha invalida." << endl;
+        }
+        num=-1;
+
+    }
+
+    else if(num==34){
+        cout << " Escriba un programa para leer dos números enteros con el signicado dado." << endl << endl;
+        unsigned int h1=0, h2=0;
+        int ht=0, mt=0, st=0;
+        cout << "Ingrese un entero con la hora: " << endl;
+        cin >> h1;
+        cout << "imgrse un entero con el tiempo transcurrido: " << endl;
+        cin >> h2;
+
+        int ss1=0, ss2=0, mm1=0, mm2=0, hh1=0, hh2=0;
+
+        ss1=h1/100;
+        ss2=h2/100;
+        h1/=100;
+        h2/=100;
+        mm1=h1/100;
+        mm2=h2/100;
+        h1/=100;
+        h2/=100;
+        hh1=h1/100;
+        hh2=h2/100;
+
+
+
+        if(ss1>=60 || ss2>=60 || mm1>=60 || mm2>=60 || hh1>=60 || hh2>=60) cout << "El tiempo ingresado es invalido." << endl;
+        else {
+            st=ss1+ss2;
+            while(st>=60){
+                st-=60;
+                mt++;
+            }
+            mt+=mm1+mm2;
+            while(mt>=60){
+                mt-=60;
+                ht++;
+            }
+            ht+=hh1+hh2;
+        }
+        cout << "La hora es: " << ht << mt << st << endl;
+        num=-1;
+
+
+    }
+
+    else if(num==35){
+        cout << " Escriba un programa que muestre el siguiente patrón en la pantalla: " << endl << endl;
+        unsigned long int n=0;
+        cout << "Ingrese un numero entero impar: " << endl;
+        cin >> n;
+        int inf=n/2, sup=n/2;     //Defino unos limites que empiezan en la mitad
+
+        for(int i=0; i<=n; i++){             //ciclo anidado para recorrer cun cuadrado de nxn
+            for(int j=0; j<=n; j++){
+                if(j>inf && j<sup) cout << "+";       //Si estoy dentro de los limites escribo +
+                else cout << " ";                     //Si no escribo un espacio
+            }
+            if(i<=n/2){                               //Si aun no he llegado a la mitad de las filas decremento el inferior y aumento el superior
+                inf--;
+                sup++;
+            }
+            else{                                     //Si estoy mas arriba de la mitad, invierto.
+                inf++;
+                sup--;
+            }
+
+            cout << endl;                        //Imprimo un salto de linea para cambiar de renglon
+            num=-1;
+        }
+    }
+
+    else if(num==36){
+        cout << " Escriba un programa que encuentre el valor aproximado del número de euler en basea la siguiente suma innita: " << endl << endl;
+        double euler=1;
+        double elementos=0, factorial=1;
+        cout << "Ingrese la cantidad de elementos (>0) con que desea aproximar euler: " << endl;
+        cin >> elementos;
+
+        for(int i=1; i<elementos; i++){       //Voy sumando elementos en cada interaccion
+            factorial*=i;                     //Voy llevando el factorial
+            euler+=1/factorial;               //Sumo un elemento
+
+        }
+
+        cout << "Euler es aproximadamente: " << euler << endl;
+        num=-1;
+    }
+
+    else if(num==37){
+        cout << "Escriba un programa que reciba un número n y halle la suma de todos los números pares en la serie de Fibonacci menores a n." << endl << endl;
+        unsigned long int n=0, t1=1, t2=0, fibonacci=1, sumatoria=0;
+        cout << "Ingrese el numero hasta el cual desea sumar los pares de la serie: " << endl;
+        cin >> n;
+
+        while(fibonacci<=n){              //Mientras el numero en la sucesion sea menor al ingresado
+            fibonacci=t1+t2;              //Sumo el termino anterioir al actual en la sucesion
+            t2=t1;                        //convierto el primer termino en el segundo
+            t1=fibonacci;                 //Tomo el actual termino en la sucesion para continuar con la suma
+
+            if(fibonacci%2==0) sumatoria+=fibonacci;       //Si el termino es par, lo agrego a la suma
+
+        }
+        cout << "El resultado de la suma es: " << sumatoria << endl;
+        num=-1;
+    }
+
+    else if(num==38){
+        cout << " Escriba un programa que reciba 3 números a, b, c, y calcule la suma de todos los múltiplos de a y b que sean menores a c." << endl << endl;
+        int a=0, b=0, c=0, sumatoria=0, cont=0;
+        cout << "Ingrese el primer numero:" << endl;
+        cin >>a;
+        cout << "Ingrese el segundo numero:" << endl;
+        cin >>b;
+        cout << "Ingrese el tercer numero:" << endl;
+        cin >>c;
+
+        while(a%cont<c){
+
+        }
+
+        cout << "La suma es: " << sumatoria << endl;
+        num=-1;
+
+
+    }
+
+    else if(num==39){
+        cout << " Escriba un programa que pida un número entero N e imprima el resultado de la suma de todos sus dígitos elevados a sí mismos." << endl << endl;
+        unsigned long int n=0, d=0, sumatoria=0, potencia=1;
+        cout << "Ingrese un numero entero: " << endl;
+        cin >> n;
+
+        while(n>0){                    //Mientras aun tenga digitos para sacar de N
+           d=n%10;                     //Extraigo el ultimo digito
+           n/=10;                      //Remuevo el ultimo digito de N
+           for(int i=0; i<d; i++){     //Este ciclo se ejecutará la cantidad de veces que indique el digito
+               potencia*=d;            //Multiplico el valor del digito por si mismo n veces para obtener la potencia
+           }
+           sumatoria+=potencia;        //Agrego esta potencia a la sumatoria
+           potencia=1;                 //Reinicio la variable potencia para el proximo ciclo
+
+        }
+        cout << "La suma es: " << sumatoria << endl;
+        num =-1;
+    }
+
+    else if(num==40){
+        cout << "Escriba un programa que reciba un número n e imprima el enésimo número primo." << endl << endl;
+        int n=0, aux=0, cont1=1, cont2=0;
+        cout << "Ingrese un numero entero: " << endl;
+        cin >> n;
+
+        while(n>cont2){                               //Se ejecuta hasta que encontremos la posicion N en los primos
+            for(int i=1; i<=cont1; i++){              //Voy recorriendo todos los numeros para ir sacando los primos
+                if(cont1%i==0) aux++;                 //Si es divisor, sume a la auxiliar
+            }
+            if(aux==2) cont2++;                       //Si aux es igual a 2, entonces es primo
+            cont1++;                                  //Encotramos una posicion de los primos
+            aux=0;                                    //Reiniciamos la variable
+        }
+
+        cout << "El primo numero " << n << " es: " << cont1-1 << endl;
+        num=-1;
+    }
+
+    else if(num==41){
+
+    }
+
+
 
   }
 
