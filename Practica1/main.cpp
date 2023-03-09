@@ -680,9 +680,70 @@ int main()
         cout << "El primo numero " << n << " es: " << cont1-1 << endl;
         num=-1;
     }
-
     else if(num==41){
+        cout << "SIN TERMINAR" << endl << endl;
+        num=-1;
+    }
 
+    else if(num==42){
+        cout << " Escriba un programa que calcula el máximo factor primo de un número." << endl << endl;
+        int n=0, aux=0, mayor=0;
+        cout << "Ingrese un  numero entero: " << endl;
+        cin >> n;
+
+        for(int i=1; i<n; i++){                   //Recorro desde 1 hasta N
+            if(n%i==0){                           //Si i es divisor de N, entonces es factor
+                for(int j=1; j<=i; j++){          //Con este ciclo verifico si es primo
+                    if(i%j==0) aux++;
+                }
+                if(aux==2) mayor=i;               //Si es primo lo almaceno como mayor
+                aux=0;
+            }
+        }
+
+        cout << "El mayor factor primo de " << n << " es: " << mayor << endl;
+        num=-1;
+    }
+
+    else if(num==43){
+         cout << "Escriba un programa que reciba un número y calcule la suma de todos los primos menores que el número ingresado: " << endl << endl;
+         unsigned int n=0, sumatoria=0, cont1=0, aux=0;
+         cout << "Ingrese un numero: " << endl;
+         cin >> n;
+
+         while(cont1<n){                               //Mientras el primo en el que estoy sea menor que el N ingresado
+             for(int i=1; i<=cont1; i++){              //Voy recorriendo todos los numeros para ir sacando los primos
+                 if(cont1%i==0) aux++;                 //Si es divisor, sume a la auxiliar
+             }
+             if(aux==2 && cont1<n) sumatoria+=cont1;                       //Si aux es igual a 2, entonces es primo y lo agrego a la suma
+             cont1++;                                                      //aumento para verificar si el siguiente es primo
+             aux=0;                                                        //Reinicio la variable
+         }
+
+         cout << "El resultado de la suma es: " << sumatoria << endl;
+         num=-1;
+
+
+    }
+
+    else if(num==44){
+        cout << "SIN TERMINAR :(" << endl << endl;
+        num=-1;
+    }
+
+    else if(num==45){
+        cout << "SIN TERMINAR :(" << endl << endl;
+        num=-1;
+    }
+
+    else if(num==46){
+        cout << "SIN TERMINAR :(" << endl << endl;
+        num=-1;
+    }
+
+    else if(num==47){
+        cout << "SIN TERMINAR :(" << endl << endl;
+        num=-1;
     }
 
 
